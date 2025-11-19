@@ -1,0 +1,103 @@
+{
+  "model": "mult-hard",
+  "epoch": 40,
+  "baseline_accuracy": 0.9921875,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 2,
+      "accuracy_drop": 0.844531238079071,
+      "ablated_accuracy": 0.14765626192092896
+    },
+    {
+      "layer": 1,
+      "head": 2,
+      "accuracy_drop": 0.6773437261581421,
+      "ablated_accuracy": 0.3148437738418579
+    },
+    {
+      "layer": 0,
+      "head": 7,
+      "accuracy_drop": 0.4117187559604645,
+      "ablated_accuracy": 0.5804687440395355
+    },
+    {
+      "layer": 0,
+      "head": 5,
+      "accuracy_drop": 0.20156249403953552,
+      "ablated_accuracy": 0.7906250059604645
+    },
+    {
+      "layer": 0,
+      "head": 6,
+      "accuracy_drop": 0.17578125,
+      "ablated_accuracy": 0.81640625
+    },
+    {
+      "layer": 1,
+      "head": 5,
+      "accuracy_drop": 0.15859374403953552,
+      "ablated_accuracy": 0.8335937559604645
+    },
+    {
+      "layer": 0,
+      "head": 4,
+      "accuracy_drop": 0.15000000596046448,
+      "ablated_accuracy": 0.8421874940395355
+    },
+    {
+      "layer": 0,
+      "head": 0,
+      "accuracy_drop": 0.12187500298023224,
+      "ablated_accuracy": 0.8703124970197678
+    },
+    {
+      "layer": 0,
+      "head": 3,
+      "accuracy_drop": 0.1015625,
+      "ablated_accuracy": 0.890625
+    },
+    {
+      "layer": 0,
+      "head": 1,
+      "accuracy_drop": 0.08749999850988388,
+      "ablated_accuracy": 0.9046875014901161
+    },
+    {
+      "layer": 1,
+      "head": 0,
+      "accuracy_drop": 0.07890625298023224,
+      "ablated_accuracy": 0.9132812470197678
+    },
+    {
+      "layer": 1,
+      "head": 6,
+      "accuracy_drop": 0.03828125074505806,
+      "ablated_accuracy": 0.9539062492549419
+    },
+    {
+      "layer": 1,
+      "head": 7,
+      "accuracy_drop": 0.03750000149011612,
+      "ablated_accuracy": 0.9546874985098839
+    },
+    {
+      "layer": 1,
+      "head": 1,
+      "accuracy_drop": 0.02656250074505806,
+      "ablated_accuracy": 0.9656249992549419
+    },
+    {
+      "layer": 1,
+      "head": 4,
+      "accuracy_drop": 0.01875000074505806,
+      "ablated_accuracy": 0.9734374992549419
+    },
+    {
+      "layer": 1,
+      "head": 3,
+      "accuracy_drop": 0.01015624962747097,
+      "ablated_accuracy": 0.982031250372529
+    }
+  ]
+}

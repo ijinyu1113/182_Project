@@ -1,0 +1,37 @@
+{
+  "model": "easy",
+  "epoch": 40,
+  "baseline_accuracy": 1.0,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 1,
+      "accuracy_drop": 0.359375,
+      "ablated_accuracy": 0.640625
+    },
+    {
+      "layer": 1,
+      "head": 7,
+      "accuracy_drop": 0.25078123807907104,
+      "ablated_accuracy": 0.749218761920929
+    },
+    {
+      "layer": 0,
+      "head": 0,
+      "accuracy_drop": 0.07265625149011612,
+      "ablated_accuracy": 0.9273437485098839
+    },
+    {
+      "layer": 1,
+      "head": 2,
+      "accuracy_drop": 0.06718750298023224,
+      "ablated_accuracy": 0.9328124970197678
+    },
+    {
+      "layer": 0,
+      "head": 7,
+      "accuracy_drop": 0.03203124925494194,
+      "ablated_accuracy": 0.9679687507450581
+    }
+  ]
+}

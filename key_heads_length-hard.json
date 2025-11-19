@@ -1,0 +1,85 @@
+{
+  "model": "length-hard",
+  "epoch": 40,
+  "baseline_accuracy": 0.83125,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 4,
+      "accuracy_drop": 0.3179687559604645,
+      "ablated_accuracy": 0.5132812440395356
+    },
+    {
+      "layer": 0,
+      "head": 3,
+      "accuracy_drop": 0.28203123807907104,
+      "ablated_accuracy": 0.549218761920929
+    },
+    {
+      "layer": 0,
+      "head": 1,
+      "accuracy_drop": 0.2671875059604645,
+      "ablated_accuracy": 0.5640624940395356
+    },
+    {
+      "layer": 1,
+      "head": 3,
+      "accuracy_drop": 0.2671875059604645,
+      "ablated_accuracy": 0.5640624940395356
+    },
+    {
+      "layer": 0,
+      "head": 0,
+      "accuracy_drop": 0.234375,
+      "ablated_accuracy": 0.596875
+    },
+    {
+      "layer": 0,
+      "head": 2,
+      "accuracy_drop": 0.22968749701976776,
+      "ablated_accuracy": 0.6015625029802323
+    },
+    {
+      "layer": 0,
+      "head": 5,
+      "accuracy_drop": 0.09921874850988388,
+      "ablated_accuracy": 0.7320312514901162
+    },
+    {
+      "layer": 1,
+      "head": 5,
+      "accuracy_drop": 0.08515624701976776,
+      "ablated_accuracy": 0.7460937529802323
+    },
+    {
+      "layer": 0,
+      "head": 6,
+      "accuracy_drop": 0.06406249850988388,
+      "ablated_accuracy": 0.7671875014901162
+    },
+    {
+      "layer": 1,
+      "head": 4,
+      "accuracy_drop": 0.04765624925494194,
+      "ablated_accuracy": 0.7835937507450581
+    },
+    {
+      "layer": 1,
+      "head": 0,
+      "accuracy_drop": 0.03515625,
+      "ablated_accuracy": 0.79609375
+    },
+    {
+      "layer": 0,
+      "head": 7,
+      "accuracy_drop": 0.02734375,
+      "ablated_accuracy": 0.80390625
+    },
+    {
+      "layer": 1,
+      "head": 2,
+      "accuracy_drop": 0.02734375,
+      "ablated_accuracy": 0.80390625
+    }
+  ]
+}

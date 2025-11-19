@@ -1,0 +1,55 @@
+{
+  "model": "bpe-hard",
+  "epoch": 40,
+  "baseline_accuracy": 1.0,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 6,
+      "accuracy_drop": 0.36250001192092896,
+      "ablated_accuracy": 0.637499988079071
+    },
+    {
+      "layer": 0,
+      "head": 2,
+      "accuracy_drop": 0.2992187440395355,
+      "ablated_accuracy": 0.7007812559604645
+    },
+    {
+      "layer": 1,
+      "head": 0,
+      "accuracy_drop": 0.296875,
+      "ablated_accuracy": 0.703125
+    },
+    {
+      "layer": 0,
+      "head": 5,
+      "accuracy_drop": 0.18437500298023224,
+      "ablated_accuracy": 0.8156249970197678
+    },
+    {
+      "layer": 0,
+      "head": 4,
+      "accuracy_drop": 0.18125000596046448,
+      "ablated_accuracy": 0.8187499940395355
+    },
+    {
+      "layer": 0,
+      "head": 3,
+      "accuracy_drop": 0.10703124850988388,
+      "ablated_accuracy": 0.8929687514901161
+    },
+    {
+      "layer": 1,
+      "head": 5,
+      "accuracy_drop": 0.06953124701976776,
+      "ablated_accuracy": 0.9304687529802322
+    },
+    {
+      "layer": 1,
+      "head": 7,
+      "accuracy_drop": 0.03203124925494194,
+      "ablated_accuracy": 0.9679687507450581
+    }
+  ]
+}

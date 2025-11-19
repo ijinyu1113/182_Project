@@ -1,0 +1,25 @@
+{
+  "model": "mixed",
+  "epoch": 20,
+  "baseline_accuracy": 0.17265625,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 2,
+      "accuracy_drop": 0.01328125037252903,
+      "ablated_accuracy": 0.15937499962747098
+    },
+    {
+      "layer": 0,
+      "head": 5,
+      "accuracy_drop": 0.010937499813735485,
+      "ablated_accuracy": 0.16171875018626453
+    },
+    {
+      "layer": 1,
+      "head": 7,
+      "accuracy_drop": 0.01015624962747097,
+      "ablated_accuracy": 0.16250000037252904
+    }
+  ]
+}
