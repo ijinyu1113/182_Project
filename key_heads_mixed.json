@@ -7,19 +7,28 @@
       "layer": 0,
       "head": 2,
       "accuracy_drop": 0.01328125037252903,
-      "ablated_accuracy": 0.15937499962747098
+      "ablated_accuracy": 0.15937499962747098,
+      "letter_match": 0.10833913087844849,
+      "entropy": 2.116241693496704,
+      "is_character_head": false
     },
     {
       "layer": 0,
       "head": 5,
       "accuracy_drop": 0.010937499813735485,
-      "ablated_accuracy": 0.16171875018626453
+      "ablated_accuracy": 0.16171875018626453,
+      "letter_match": 0.06616149097681046,
+      "entropy": 2.3141233921051025,
+      "is_character_head": false
     },
     {
       "layer": 1,
       "head": 7,
       "accuracy_drop": 0.01015624962747097,
-      "ablated_accuracy": 0.16250000037252904
+      "ablated_accuracy": 0.16250000037252904,
+      "letter_match": 0.13057586550712585,
+      "entropy": 1.8464022874832153,
+      "is_character_head": false
     }
   ]
 }

@@ -502,6 +502,9 @@ def main():
             
             accuracy_drops, baseline_acc = identify_key_heads(model, dataloader, device, max_batches=args.max_batches)
             
+            letter_match, entropy = compute_metrics(model, dataloader, device, pad_id=0, max_batches=args.max_batches)
+            character_mask = flag_character_heads(letter_match, entropy)
+            
             print(f"\nKEY HEADS IDENTIFIED (by accuracy drop when ablated):")
             
             n_layers, n_heads = model.cfg.n_layers, model.cfg.n_heads
@@ -511,14 +514,18 @@ def main():
                     drop = float(accuracy_drops[layer, head])
                     if drop > 0.01:
                         ablated_acc = baseline_acc - drop
-                        key_heads.append((layer, head, drop, ablated_acc))
+                        letter_match_val = float(letter_match[layer, head])
+                        entropy_val = float(entropy[layer, head])
+                        is_char = bool(character_mask[layer, head])
+                        key_heads.append((layer, head, drop, ablated_acc, letter_match_val, entropy_val, is_char))
             
             key_heads.sort(key=lambda x: x[2], reverse=True)
             
             if key_heads:
                 print(f"\nTop {min(5, len(key_heads))} key heads:")
-                for layer, head, drop, ablated in key_heads[:5]:
-                    print(f"  L{layer}H{head}: {drop:.4f} accuracy drop (baseline: {baseline_acc:.4f} -> ablated: {ablated:.4f})")
+                for layer, head, drop, ablated, letter, ent, is_char in key_heads[:5]:
+                    char_marker = " [CHAR]" if is_char else ""
+                    print(f"  L{layer}H{head}: {drop:.4f} drop, match={letter:.4f}, entropy={ent:.4f} (baseline: {baseline_acc:.4f} -> ablated: {ablated:.4f}){char_marker}")
             else:
                 print("\nNo heads with significant accuracy drop found.")
                 print("This suggests the model uses distributed computation across heads.")
@@ -534,9 +541,12 @@ def main():
                             "layer": l,
                             "head": h,
                             "accuracy_drop": float(d),
-                            "ablated_accuracy": float(a)
+                            "ablated_accuracy": float(a),
+                            "letter_match": float(letter),
+                            "entropy": float(ent),
+                            "is_character_head": bool(is_char)
                         }
-                        for l, h, d, a in key_heads
+                        for l, h, d, a, letter, ent, is_char in key_heads
                     ]
                 }, f, indent=2)
             print(f"\nSaved key heads analysis to {key_heads_output}")
