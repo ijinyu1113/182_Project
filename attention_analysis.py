@@ -220,31 +220,70 @@ def compute_metrics(model, dataloader, device, pad_id=0, max_batches=50):
         for batch in dataloader:
             tokens = batch["input_ids"].to(device)
             padding_mask = tokens != pad_id
-            seq_mask = padding_mask.unsqueeze(1).unsqueeze(-1) & padding_mask.unsqueeze(1).unsqueeze(2)
+            
+            # FIXED: Correct positions
+            # Format: "Count the letter X in: <string>"
+            # Positions: 0=Count, 1=space, 2=the, 3=space, 4=letter, 5=space, 6=X, 7=space, 8=in, 9=:, 10=space, 11=start_of_string
+            target_letter_pos = 6  # The actual letter X
+            string_start_pos = 11  # After "in: "
+            
+            target_letters = tokens[:, target_letter_pos]  # [batch]
+            
+            # Find where target letter appears in the string (positions 11+)
+            target_mask = (tokens == target_letters.unsqueeze(1))  # [batch, seq_len]
+            
+            # Only count matches in the string (not in prompt)
+            string_mask = torch.zeros_like(target_mask)
+            string_mask[:, string_start_pos:] = True
+            target_mask = target_mask & string_mask & padding_mask
+            
+            # Non-target positions in string
+            non_target_mask = (~target_mask) & string_mask & padding_mask
+            
+            # Count valid positions
+            target_counts = target_mask.sum(-1)  # [batch]
+            non_target_counts = non_target_mask.sum(-1)  # [batch]
+            valid_examples = (target_counts > 0) & (non_target_counts > 0)  # [batch]
+            
+            # Debug first batch
+            if processed_batches == 0:
+                print("\n=== DEBUGGING FIRST BATCH ===")
+                print(f"Tokens shape: {tokens.shape}")
+                print(f"First 20 tokens: {tokens[0, :20]}")
+                print(f"\nTarget letter (pos {target_letter_pos}): token_id={target_letters[0]}")
+                print(f"Target appears at positions: {torch.where(target_mask[0])[0]}")
+                print(f"Target count in string: {target_counts[0]}")
+                print(f"Non-target count: {non_target_counts[0]}")
+                print(f"Valid examples in batch: {valid_examples.sum()}/{len(valid_examples)}")
 
+            # Analyze attention patterns
             _, cache = model.run_with_cache(tokens)
 
-            same_token = (tokens.unsqueeze(2) == tokens.unsqueeze(1)) & seq_mask.squeeze(1)
-            diff_token = (~same_token) & seq_mask.squeeze(1)
-
-            same_counts = same_token.sum(-1)
-            diff_counts = diff_token.sum(-1)
-            valid_query = padding_mask & (same_counts > 0) & (diff_counts > 0)
-
             for layer in range(n_layers):
-                attn = cache[f"blocks.{layer}.attn.hook_pattern"]
+                attn = cache[f"blocks.{layer}.attn.hook_pattern"]  # [batch, heads, seq_len, seq_len]
 
+                # Entropy
                 entropy = -(attn * (attn.clamp_min(1e-9).log())).sum(-1)
                 entropy_mask = padding_mask.unsqueeze(1)
                 entropy_sum[layer] += (entropy_mask * entropy).sum(dim=(0, 2))
                 entropy_count[layer] += entropy_mask.sum(dim=(0, 2))
 
-                same_mean = (attn * same_token.unsqueeze(1)).sum(-1) / same_counts.unsqueeze(1).clamp_min(1)
-                diff_mean = (attn * diff_token.unsqueeze(1)).sum(-1) / diff_counts.unsqueeze(1).clamp_min(1)
-                delta = same_mean - diff_mean
-                mask = valid_query.unsqueeze(1)
-                letter_score_sum[layer] += (delta * mask).sum(dim=(0, 2))
-                count_valid[layer] += mask.sum(dim=(0, 2))
+                # Average attention to target vs non-target positions
+                target_attn_sum = (attn * target_mask.unsqueeze(1).unsqueeze(1)).sum(-1)
+                non_target_attn_sum = (attn * non_target_mask.unsqueeze(1).unsqueeze(1)).sum(-1)
+                
+                # Average across key positions
+                target_mean = target_attn_sum / target_counts.unsqueeze(1).unsqueeze(2).clamp_min(1)
+                non_target_mean = non_target_attn_sum / non_target_counts.unsqueeze(1).unsqueeze(2).clamp_min(1)
+                
+                # Differential attention
+                delta = target_mean - non_target_mean  # [batch, heads, seq_len]
+                
+                # Only count valid query positions in string
+                query_mask = string_mask & padding_mask & valid_examples.unsqueeze(1)
+                
+                letter_score_sum[layer] += (delta * query_mask.unsqueeze(1)).sum(dim=(0, 2))
+                count_valid[layer] += query_mask.unsqueeze(1).sum(dim=(0, 2))
 
             processed_batches += 1
             if processed_batches >= max_batches:

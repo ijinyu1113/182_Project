@@ -1,0 +1,674 @@
+[
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 0,
+    "letter_match": -0.0006172981229610741,
+    "entropy": 1.5101368427276611
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 1,
+    "letter_match": -0.0007732186350040138,
+    "entropy": 1.76442551612854
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 2,
+    "letter_match": 0.003271320601925254,
+    "entropy": 2.0599400997161865
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 3,
+    "letter_match": 0.0013126765843480825,
+    "entropy": 2.0228116512298584
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 4,
+    "letter_match": 0.003921212628483772,
+    "entropy": 2.0917255878448486
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 5,
+    "letter_match": 0.003493035212159157,
+    "entropy": 2.096494197845459
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 6,
+    "letter_match": 0.0015096388524398208,
+    "entropy": 2.026207208633423
+  },
+  {
+    "model": "easy",
+    "layer": 0,
+    "head": 7,
+    "letter_match": -0.00021670633577741683,
+    "entropy": 1.5964001417160034
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 0,
+    "letter_match": 0.20272196829319,
+    "entropy": 1.7324841022491455
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 1,
+    "letter_match": 0.22118686139583588,
+    "entropy": 1.6975395679473877
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 2,
+    "letter_match": 0.4202522337436676,
+    "entropy": 0.45936480164527893
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 3,
+    "letter_match": 0.22312164306640625,
+    "entropy": 1.6994028091430664
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 4,
+    "letter_match": 0.22423091530799866,
+    "entropy": 1.685295581817627
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 5,
+    "letter_match": -1.70288622030057e-05,
+    "entropy": 1.0420308113098145
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 6,
+    "letter_match": 0.1029021367430687,
+    "entropy": 1.8277820348739624
+  },
+  {
+    "model": "easy",
+    "layer": 1,
+    "head": 7,
+    "letter_match": 0.258548766374588,
+    "entropy": 1.1080105304718018
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 0,
+    "letter_match": 0.0019148476421833038,
+    "entropy": 2.0751712322235107
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 1,
+    "letter_match": 0.002083263825625181,
+    "entropy": 2.0827226638793945
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 2,
+    "letter_match": -0.0007707611657679081,
+    "entropy": 1.6824039220809937
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 3,
+    "letter_match": 0.003608566476032138,
+    "entropy": 2.081775426864624
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 4,
+    "letter_match": -0.0016895020380616188,
+    "entropy": 1.3198617696762085
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 5,
+    "letter_match": -0.001629144768230617,
+    "entropy": 1.379609227180481
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 6,
+    "letter_match": -0.0022871000692248344,
+    "entropy": 1.7219185829162598
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 0,
+    "head": 7,
+    "letter_match": 0.0031531762797385454,
+    "entropy": 2.0935988426208496
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 0,
+    "letter_match": 0.1880176067352295,
+    "entropy": 1.5689599514007568
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 1,
+    "letter_match": -2.5253195417462848e-05,
+    "entropy": 0.5907211899757385
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 2,
+    "letter_match": 0.17413434386253357,
+    "entropy": 1.4959707260131836
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 3,
+    "letter_match": 0.17527493834495544,
+    "entropy": 1.49403977394104
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 4,
+    "letter_match": -5.316535407473566e-06,
+    "entropy": 0.5753021240234375
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 5,
+    "letter_match": -1.2990451978112105e-05,
+    "entropy": 0.568089485168457
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 6,
+    "letter_match": 0.18620572984218597,
+    "entropy": 1.4556044340133667
+  },
+  {
+    "model": "bpe-hard",
+    "layer": 1,
+    "head": 7,
+    "letter_match": 0.270416259765625,
+    "entropy": 1.2010436058044434
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 0,
+    "letter_match": -0.03498521074652672,
+    "entropy": 0.8448230028152466
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 1,
+    "letter_match": -0.030821483582258224,
+    "entropy": 0.8417928218841553
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 2,
+    "letter_match": 0.02285858616232872,
+    "entropy": 1.4610029458999634
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 3,
+    "letter_match": -0.031988419592380524,
+    "entropy": 0.9692782163619995
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 4,
+    "letter_match": -0.034459199756383896,
+    "entropy": 0.9172273874282837
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 5,
+    "letter_match": -0.02842651680111885,
+    "entropy": 0.9173046946525574
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 6,
+    "letter_match": -0.03169601783156395,
+    "entropy": 0.932479202747345
+  },
+  {
+    "model": "mult-hard",
+    "layer": 0,
+    "head": 7,
+    "letter_match": 0.026515619829297066,
+    "entropy": 1.5735660791397095
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 0,
+    "letter_match": 0.013154176063835621,
+    "entropy": 1.0826131105422974
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 1,
+    "letter_match": 0.04700097441673279,
+    "entropy": 1.5535892248153687
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 2,
+    "letter_match": 0.05921197682619095,
+    "entropy": 1.4896548986434937
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 3,
+    "letter_match": 0.022420575842261314,
+    "entropy": 0.9509057402610779
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 4,
+    "letter_match": 0.022148286923766136,
+    "entropy": 1.1757293939590454
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 5,
+    "letter_match": 0.018640942871570587,
+    "entropy": 0.7307198643684387
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 6,
+    "letter_match": 0.023453593254089355,
+    "entropy": 1.1652019023895264
+  },
+  {
+    "model": "mult-hard",
+    "layer": 1,
+    "head": 7,
+    "letter_match": 0.0703529492020607,
+    "entropy": 1.404349446296692
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 0,
+    "letter_match": 0.0004088216810487211,
+    "entropy": 2.8648691177368164
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 1,
+    "letter_match": -0.00044317013816908,
+    "entropy": 2.814194679260254
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 2,
+    "letter_match": -0.0006158220348879695,
+    "entropy": 2.794630527496338
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 3,
+    "letter_match": 0.00026657545822672546,
+    "entropy": 2.8176770210266113
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 4,
+    "letter_match": 0.00042217253940179944,
+    "entropy": 2.8940627574920654
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 5,
+    "letter_match": 0.00023752820561639965,
+    "entropy": 2.8028805255889893
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 6,
+    "letter_match": 0.0003506612265482545,
+    "entropy": 2.8844311237335205
+  },
+  {
+    "model": "length-hard",
+    "layer": 0,
+    "head": 7,
+    "letter_match": 0.0004342217289377004,
+    "entropy": 2.9200422763824463
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 0,
+    "letter_match": 0.013927760533988476,
+    "entropy": 2.7074387073516846
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 1,
+    "letter_match": -0.005167351104319096,
+    "entropy": 2.8467230796813965
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 2,
+    "letter_match": -0.00817567016929388,
+    "entropy": 1.8856849670410156
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 3,
+    "letter_match": 0.038790490478277206,
+    "entropy": 2.6481239795684814
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 4,
+    "letter_match": 0.09244296699762344,
+    "entropy": 1.4721516370773315
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 5,
+    "letter_match": 0.007922324351966381,
+    "entropy": 2.479262113571167
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 6,
+    "letter_match": -0.0009597910102456808,
+    "entropy": 2.3783140182495117
+  },
+  {
+    "model": "length-hard",
+    "layer": 1,
+    "head": 7,
+    "letter_match": -0.004829838406294584,
+    "entropy": 2.694521188735962
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 0,
+    "letter_match": -0.0005574538372457027,
+    "entropy": 1.5645886659622192
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 1,
+    "letter_match": -0.0008043210254982114,
+    "entropy": 1.9903734922409058
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 2,
+    "letter_match": -0.002341042971238494,
+    "entropy": 2.418781042098999
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 3,
+    "letter_match": -0.0001288782514166087,
+    "entropy": 2.571709156036377
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 4,
+    "letter_match": -0.00044476843322627246,
+    "entropy": 2.919173240661621
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 5,
+    "letter_match": -0.0007228071335703135,
+    "entropy": 2.6910407543182373
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 6,
+    "letter_match": -0.001187735702842474,
+    "entropy": 2.667067766189575
+  },
+  {
+    "model": "all-hard",
+    "layer": 0,
+    "head": 7,
+    "letter_match": -0.0025952989235520363,
+    "entropy": 2.3592467308044434
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 0,
+    "letter_match": 0.0250669214874506,
+    "entropy": 2.843066930770874
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 1,
+    "letter_match": 0.0071832542307674885,
+    "entropy": 2.897723913192749
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 2,
+    "letter_match": 0.03408075124025345,
+    "entropy": 2.766685724258423
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 3,
+    "letter_match": 0.028825458139181137,
+    "entropy": 2.82224178314209
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 4,
+    "letter_match": 0.033709850162267685,
+    "entropy": 2.7859654426574707
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 5,
+    "letter_match": 0.02749679982662201,
+    "entropy": 2.815622091293335
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 6,
+    "letter_match": 0.1521715372800827,
+    "entropy": 1.2969404458999634
+  },
+  {
+    "model": "all-hard",
+    "layer": 1,
+    "head": 7,
+    "letter_match": 0.038092516362667084,
+    "entropy": 2.6885969638824463
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 0,
+    "letter_match": -0.004791224841028452,
+    "entropy": 2.4152743816375732
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 1,
+    "letter_match": -0.0048995548859238625,
+    "entropy": 2.1728062629699707
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 2,
+    "letter_match": -0.006857411470264196,
+    "entropy": 2.113739013671875
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 3,
+    "letter_match": -0.005950571037828922,
+    "entropy": 2.255106210708618
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 4,
+    "letter_match": -0.007628051098436117,
+    "entropy": 2.2513110637664795
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 5,
+    "letter_match": -0.00415672967210412,
+    "entropy": 2.3115007877349854
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 6,
+    "letter_match": -0.004173238296061754,
+    "entropy": 2.4147281646728516
+  },
+  {
+    "model": "mixed",
+    "layer": 0,
+    "head": 7,
+    "letter_match": -0.00375187024474144,
+    "entropy": 2.3247814178466797
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 0,
+    "letter_match": -0.001509387046098709,
+    "entropy": 1.6059015989303589
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 1,
+    "letter_match": -0.0033634058199822903,
+    "entropy": 1.3505455255508423
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 2,
+    "letter_match": -0.00442214822396636,
+    "entropy": 1.4789631366729736
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 3,
+    "letter_match": -0.0014662409666925669,
+    "entropy": 1.3791327476501465
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 4,
+    "letter_match": -0.004052892327308655,
+    "entropy": 1.3719478845596313
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 5,
+    "letter_match": -0.0026894561015069485,
+    "entropy": 1.3453303575515747
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 6,
+    "letter_match": -0.003196753328666091,
+    "entropy": 1.4082542657852173
+  },
+  {
+    "model": "mixed",
+    "layer": 1,
+    "head": 7,
+    "letter_match": -0.002381018828600645,
+    "entropy": 1.8431950807571411
+  }
+]

@@ -1,111 +1,111 @@
 {
   "model": "length-hard",
   "epoch": 40,
-  "baseline_accuracy": 0.825,
+  "baseline_accuracy": 0.834625,
   "key_heads": [
     {
       "layer": 0,
       "head": 4,
-      "accuracy_drop": 0.3375000059604645,
-      "ablated_accuracy": 0.4874999940395355,
-      "letter_match": 0.05604134500026703,
-      "entropy": 2.8997340202331543
-    },
-    {
-      "layer": 0,
-      "head": 3,
-      "accuracy_drop": 0.28437501192092896,
-      "ablated_accuracy": 0.540624988079071,
-      "letter_match": 0.056722063571214676,
-      "entropy": 2.828618049621582
-    },
-    {
-      "layer": 1,
-      "head": 3,
-      "accuracy_drop": 0.2562499940395355,
-      "ablated_accuracy": 0.5687500059604644,
-      "letter_match": 0.04671190679073334,
-      "entropy": 2.639723300933838
+      "accuracy_drop": 0.304625004529953,
+      "ablated_accuracy": 0.529999995470047,
+      "letter_match": 0.00042217253940179944,
+      "entropy": 2.8940627574920654
     },
     {
       "layer": 0,
       "head": 1,
-      "accuracy_drop": 0.25,
-      "ablated_accuracy": 0.575,
-      "letter_match": 0.08719246089458466,
-      "entropy": 2.8202972412109375
+      "accuracy_drop": 0.2847500145435333,
+      "ablated_accuracy": 0.5498749854564666,
+      "letter_match": -0.00044317013816908,
+      "entropy": 2.814194679260254
     },
     {
       "layer": 0,
-      "head": 0,
-      "accuracy_drop": 0.23749999701976776,
-      "ablated_accuracy": 0.5875000029802322,
-      "letter_match": 0.05686088278889656,
-      "entropy": 2.8714914321899414
+      "head": 3,
+      "accuracy_drop": 0.28087499737739563,
+      "ablated_accuracy": 0.5537500026226043,
+      "letter_match": 0.00026657545822672546,
+      "entropy": 2.8176770210266113
+    },
+    {
+      "layer": 1,
+      "head": 3,
+      "accuracy_drop": 0.2747499942779541,
+      "ablated_accuracy": 0.5598750057220458,
+      "letter_match": 0.038790490478277206,
+      "entropy": 2.6481239795684814
     },
     {
       "layer": 0,
       "head": 2,
-      "accuracy_drop": 0.21250000596046448,
-      "ablated_accuracy": 0.6124999940395355,
-      "letter_match": 0.07489480078220367,
-      "entropy": 2.805011749267578
+      "accuracy_drop": 0.24899999797344208,
+      "ablated_accuracy": 0.5856250020265579,
+      "letter_match": -0.0006158220348879695,
+      "entropy": 2.794630527496338
     },
     {
-      "layer": 1,
-      "head": 5,
-      "accuracy_drop": 0.08124999701976776,
-      "ablated_accuracy": 0.7437500029802322,
-      "letter_match": 0.05118440464138985,
-      "entropy": 2.499882221221924
+      "layer": 0,
+      "head": 0,
+      "accuracy_drop": 0.2303750067949295,
+      "ablated_accuracy": 0.6042499932050704,
+      "letter_match": 0.0004088216810487211,
+      "entropy": 2.8648691177368164
     },
     {
       "layer": 0,
       "head": 5,
-      "accuracy_drop": 0.06875000149011612,
-      "ablated_accuracy": 0.7562499985098838,
-      "letter_match": 0.04986753687262535,
-      "entropy": 2.8099265098571777
+      "accuracy_drop": 0.10037499666213989,
+      "ablated_accuracy": 0.7342500033378601,
+      "letter_match": 0.00023752820561639965,
+      "entropy": 2.8028805255889893
+    },
+    {
+      "layer": 1,
+      "head": 5,
+      "accuracy_drop": 0.08537500351667404,
+      "ablated_accuracy": 0.7492499964833259,
+      "letter_match": 0.007922324351966381,
+      "entropy": 2.479262113571167
     },
     {
       "layer": 0,
       "head": 6,
-      "accuracy_drop": 0.0625,
-      "ablated_accuracy": 0.7625,
-      "letter_match": 0.049156561493873596,
-      "entropy": 2.8900091648101807
-    },
-    {
-      "layer": 1,
-      "head": 0,
-      "accuracy_drop": 0.05000000074505806,
-      "ablated_accuracy": 0.7749999992549419,
-      "letter_match": 0.06678356975317001,
-      "entropy": 2.7114784717559814
+      "accuracy_drop": 0.05824999883770943,
+      "ablated_accuracy": 0.7763750011622905,
+      "letter_match": 0.0003506612265482545,
+      "entropy": 2.8844311237335205
     },
     {
       "layer": 1,
       "head": 4,
-      "accuracy_drop": 0.03125,
-      "ablated_accuracy": 0.79375,
-      "letter_match": 0.0283717792481184,
-      "entropy": 1.4584532976150513
+      "accuracy_drop": 0.03762499988079071,
+      "ablated_accuracy": 0.7970000001192092,
+      "letter_match": 0.09244296699762344,
+      "entropy": 1.4721516370773315
+    },
+    {
+      "layer": 1,
+      "head": 0,
+      "accuracy_drop": 0.03700000047683716,
+      "ablated_accuracy": 0.7976249995231628,
+      "letter_match": 0.013927760533988476,
+      "entropy": 2.7074387073516846
     },
     {
       "layer": 1,
       "head": 2,
-      "accuracy_drop": 0.02812499925494194,
-      "ablated_accuracy": 0.796875000745058,
-      "letter_match": 0.0590091347694397,
-      "entropy": 1.8504102230072021
+      "accuracy_drop": 0.028999999165534973,
+      "ablated_accuracy": 0.805625000834465,
+      "letter_match": -0.00817567016929388,
+      "entropy": 1.8856849670410156
     },
     {
       "layer": 0,
       "head": 7,
-      "accuracy_drop": 0.02500000037252903,
-      "ablated_accuracy": 0.7999999996274709,
-      "letter_match": 0.0494733527302742,
-      "entropy": 2.926255226135254
+      "accuracy_drop": 0.01549999974668026,
+      "ablated_accuracy": 0.8191250002533197,
+      "letter_match": 0.0004342217289377004,
+      "entropy": 2.9200422763824463
     }
   ]
 }
