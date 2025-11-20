@@ -1,0 +1,50 @@
+{
+  "experiment": "Activation Patching: All-Hard Heads → Easy Model",
+  "test_dataset": "all-hard",
+  "source_model": "all-hard",
+  "target_model": "easy",
+  "source_baseline_accuracy": 0.9996,
+  "target_baseline_accuracy": 0.001,
+  "experiments": [
+    {
+      "experiment_name": "Single Head - L0H4",
+      "patched_heads": ["L0H4"],
+      "patched_accuracy": 0.0017,
+      "improvement": 0.0007,
+      "improvement_percent": 0.07,
+      "gap_to_source": 0.9979
+    },
+    {
+      "experiment_name": "Three Heads - Top 3",
+      "patched_heads": ["L0H4", "L1H6", "L1H4"],
+      "patched_accuracy": 0.0015,
+      "improvement": 0.0005,
+      "improvement_percent": 0.05,
+      "gap_to_source": 0.9981
+    },
+    {
+      "experiment_name": "Five Heads - Top 5",
+      "patched_heads": ["L0H4", "L1H6", "L1H4", "L1H3", "L0H1"],
+      "patched_accuracy": 0.0000,
+      "improvement": -0.0010,
+      "improvement_percent": -0.10,
+      "gap_to_source": 0.9996
+    },
+    {
+      "experiment_name": "Seven Heads - Top 7",
+      "patched_heads": ["L0H4", "L1H6", "L1H4", "L1H3", "L0H1", "L1H7", "L0H3"],
+      "patched_accuracy": 0.0491,
+      "improvement": 0.0481,
+      "improvement_percent": 4.81,
+      "gap_to_source": 0.9505
+    },
+    {
+      "experiment_name": "Nine Heads - Top 9",
+      "patched_heads": ["L0H4", "L1H6", "L1H4", "L1H3", "L0H1", "L1H7", "L0H3", "L1H2", "L1H5"],
+      "patched_accuracy": 0.1071,
+      "improvement": 0.1061,
+      "improvement_percent": 10.61,
+      "gap_to_source": 0.8925
+    }
+  ]
+}
