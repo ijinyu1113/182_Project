@@ -28,8 +28,9 @@ def main():
 
     print(f"Using device: {device}")
 
-    print("Loading dataset...")
-    dataset_path = project_root / "test-all-hard-dataset.pkl"
+    # FIX 1: Use Length-Hard test set, not All-Hard
+    print("Loading Length-Hard test dataset...")
+    dataset_path = project_root / "test-length-hard-dataset.pkl"
     dataset = load_pickle(dataset_path)
     dataloader = DataLoader(dataset, batch_size=64, shuffle=False, collate_fn=collate_fn)
     
@@ -55,75 +56,88 @@ def main():
 
     print("\nComputing Baselines...")
     acc_easy = evaluate_accuracy(model_target, dataloader, device, max_batches=50)
-    print(f"Baseline Easy Model Accuracy on All-Hard: {acc_easy:.4f}")
+    print(f"Baseline Easy Model Accuracy on Length-Hard: {acc_easy:.4f}")
 
     acc_hard = evaluate_accuracy(model_source, dataloader, device, max_batches=50)
-    print(f"Baseline All-Hard Model Accuracy on All-Hard: {acc_hard:.4f}")
+    print(f"Baseline All-Hard Model Accuracy on Length-Hard: {acc_hard:.4f}")
 
-    print("\nRunning Activation Patching...")
+    # FIX 2: Test different head combinations
+    test_configs = [
+        ("L1H6 only", 1, [6]),
+        ("L1H4 only", 1, [4]),
+        ("L1H6 + L1H4", 1, [4, 6]),
+    ]
     
-    LAYER = 1
-    HEADS = [4, 6]
-    HOOK_NAME = f"blocks.{LAYER}.attn.hook_z"
+    print("\nRunning Activation Patching Experiments...")
     
-    print(f"Patching {HOOK_NAME} for heads {HEADS}")
+    for config_name, layer, heads in test_configs:
+        print(f"\n--- Testing: {config_name} ---")
+        HOOK_NAME = f"blocks.{layer}.attn.hook_z"
+        
+        total = 0
+        correct = 0
+        processed = 0
+        max_batches = 50
 
-    total = 0
-    correct = 0
-    processed = 0
-    max_batches = 50
+        with torch.no_grad():
+            for batch in dataloader:
+                input_ids = batch["input_ids"].to(device)
+                loss_mask = batch["loss_mask"].to(device)
+                
+                # Run source model and cache activations
+                _, cache_source = model_source.run_with_cache(input_ids[:, :-1])
+                source_acts = cache_source[HOOK_NAME]
 
-    with torch.no_grad():
-        for batch in dataloader:
-            input_ids = batch["input_ids"].to(device)
-            loss_mask = batch["loss_mask"].to(device)
-            
-            _, cache_source = model_source.run_with_cache(input_ids[:, :-1])
-            source_acts = cache_source[HOOK_NAME]
+                # FIX 3: Add dimension check
+                def patch_hook(activations, hook):
+                    batch_size = min(activations.shape[0], source_acts.shape[0])
+                    for h in heads:
+                        activations[:batch_size, :, h, :] = source_acts[:batch_size, :, h, :]
+                    return activations
 
-            def patch_hook(activations, hook):
-                for h in HEADS:
-                    activations[:, :, h, :] = source_acts[:, :, h, :]
-                return activations
+                # Run target model with patched activations
+                logits = model_target.run_with_hooks(
+                    input_ids[:, :-1],
+                    fwd_hooks=[(HOOK_NAME, patch_hook)]
+                )
 
-            logits = model_target.run_with_hooks(
-                input_ids[:, :-1],
-                fwd_hooks=[(HOOK_NAME, patch_hook)]
-            )
-
-            targets = input_ids[:, 1:]
-            mask = loss_mask[:, 1:]
-            preds = logits.argmax(dim=-1)
-            
-            per_row = mask.sum(dim=1)
-            valid_rows = (per_row == 1)
-            
-            if not valid_rows.any():
+                # Evaluate
+                targets = input_ids[:, 1:]
+                mask = loss_mask[:, 1:]
+                preds = logits.argmax(dim=-1)
+                
+                per_row = mask.sum(dim=1)
+                valid_rows = (per_row == 1)
+                
+                if not valid_rows.any():
+                    processed += 1
+                    if processed >= max_batches: break
+                    continue
+                
+                mask_valid = mask[valid_rows].bool()
+                preds_valid = preds[valid_rows]
+                targets_valid = targets[valid_rows]
+                
+                pred_answers = preds_valid[mask_valid]
+                true_answers = targets_valid[mask_valid]
+                
+                correct += (pred_answers == true_answers).sum().item()
+                total += pred_answers.numel()
+                
                 processed += 1
-                if processed >= max_batches: break
-                continue
-            
-            mask_valid = mask[valid_rows].bool()
-            preds_valid = preds[valid_rows]
-            targets_valid = targets[valid_rows]
-            
-            pred_answers = preds_valid[mask_valid]
-            true_answers = targets_valid[mask_valid]
-            
-            correct += (pred_answers == true_answers).sum().item()
-            total += pred_answers.numel()
-            
-            processed += 1
-            if processed >= max_batches:
-                break
+                if processed >= max_batches:
+                    break
 
-    acc_patched = correct / total if total > 0 else 0
-    print(f"Patched Model Accuracy: {acc_patched:.4f}")
-    
-    print("\nSummary:")
-    print(f"Easy (Baseline): {acc_easy:.4f}")
-    print(f"All-Hard (Source): {acc_hard:.4f}")
-    print(f"Easy + Patched L1H{HEADS}: {acc_patched:.4f}")
+        acc_patched = correct / total if total > 0 else 0
+        print(f"{config_name} Accuracy: {acc_patched:.4f} (Δ = {acc_patched - acc_easy:+.4f})")
+
+    print("\n" + "="*60)
+    print("SUMMARY")
+    print("="*60)
+    print(f"Easy Baseline:      {acc_easy:.4f}")
+    print(f"All-Hard Baseline:  {acc_hard:.4f}")
+    print("="*60)
+
 
 if __name__ == "__main__":
     main()
