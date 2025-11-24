@@ -1,0 +1,47 @@
+{
+  "model": "easy",
+  "epoch": 40,
+  "baseline_accuracy": 1.0,
+  "key_heads": [
+    {
+      "layer": 0,
+      "head": 1,
+      "accuracy_drop": 0.3542500138282776,
+      "ablated_accuracy": 0.6457499861717224,
+      "letter_match": -0.0007732186350040138,
+      "entropy": 1.76442551612854
+    },
+    {
+      "layer": 1,
+      "head": 7,
+      "accuracy_drop": 0.2396250069141388,
+      "ablated_accuracy": 0.7603749930858612,
+      "letter_match": 0.258548766374588,
+      "entropy": 1.1080105304718018
+    },
+    {
+      "layer": 1,
+      "head": 2,
+      "accuracy_drop": 0.06887499988079071,
+      "ablated_accuracy": 0.9311250001192093,
+      "letter_match": 0.4202522337436676,
+      "entropy": 0.45936480164527893
+    },
+    {
+      "layer": 0,
+      "head": 0,
+      "accuracy_drop": 0.06650000065565109,
+      "ablated_accuracy": 0.9334999993443489,
+      "letter_match": -0.0006172981229610741,
+      "entropy": 1.5101368427276611
+    },
+    {
+      "layer": 0,
+      "head": 7,
+      "accuracy_drop": 0.030249999836087227,
+      "ablated_accuracy": 0.9697500001639128,
+      "letter_match": -0.00021670633577741683,
+      "entropy": 1.5964001417160034
+    }
+  ]
+}
