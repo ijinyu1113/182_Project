@@ -467,7 +467,7 @@ def main():
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model_names = ["easy", "bpe-hard", "mult-hard", "length-hard", "all-hard", "mixed"]
+    model_names = ["easy", "mult-hard", "length-hard", "all-hard"]
     all_metrics: List[HeadMetrics] = []
 
     def find_latest_epoch(model_name: str, project_root: Path) -> int:
