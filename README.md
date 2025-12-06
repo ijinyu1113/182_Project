@@ -13,6 +13,7 @@ We train 2-layer transformer models on a character-counting task ("Count the let
 - **H3 (Transferability)**: Despite functional similarity, circuits do not transfer between models trained on different distributions (0% improvement via activation patching).
 
 ## Repository Structure
+
 ├── model.ipynb                       # Main training notebook
 ├── attention_analysis.py             # Head ablation & attention analysis
 ├── ov_qk_circuit_analysis.py         # OV/QK eigenvalue analysis
@@ -32,50 +33,66 @@ We train 2-layer transformer models on a character-counting task ("Count the let
 ├── l1h6_pattern_ex*.png              # L1H6 attention visualizations
 ├── l1h4_pattern_ex*.png              # L1H4 attention visualizations
 └── requirements.txt                  # Dependencies
+
 ## Training Distributions
 
 | Model | Sequence Length | Target Multiplicity | Description |
 |-------|-----------------|---------------------|-------------|
-| `easy` | 5-10 chars | 1-2 | Baseline (short, sparse) |
-| `mult-hard` | 5-10 chars | 3-10 | High multiplicity only |
-| `length-hard` | 20-50 chars | 1-2 | Long sequences only |
-| `bpe-hard` | 5-10 chars | 1-2 | BPE tokenization |
-| `all-hard` | 20-50 chars | 3-10 | Long + high multiplicity |
-| `mixed` | Mixed | Mixed | Combination of all |
+| easy | 5-10 chars | 1-2 | Baseline (short, sparse) |
+| mult-hard | 5-10 chars | 3-10 | High multiplicity only |
+| length-hard | 20-50 chars | 1-2 | Long sequences only |
+| all-hard | 20-50 chars | 3-10 | Long + high multiplicity |
 
 ## Installation
 
-```bash
 git clone https://github.com/ijinyu1113/182_Project.git
 cd 182_Project
 pip install -r requirements.txt
 
-## Dependencies
-PyTorch
-TransformerLens
-NumPy
-Matplotlib
+### Dependencies
+
+- PyTorch
+- TransformerLens
+- NumPy
+- Matplotlib
 
 ## Usage
+
 ### Training Models
+
 jupyter notebook model.ipynb
+
 ### Analyzing Attention Heads
+
 from attention_analysis import build_model, load_pickle, evaluate_accuracy
 
 tokenizer = load_pickle("train-all-hard-tokenizer.pkl")
 dataset = load_pickle("test-all-hard-dataset.pkl")
 model = build_model(vocab_size=tokenizer.vocab.size + 5, device="cuda")
+
 ### Running Activation Patching
+
 python activation_patching.py
 
-Model Architecture
-Layers: 2
-Attention Heads: 8 per layer
-Embedding Dimension: 128
-Context Length: 64
-Tokenization: Character-level
-Contributors
-@ijinyu1113
-@WKaiZ
-@siva-tanikonda
-@sanjay-adhikesaven
+This runs the circuit transfer experiment (All-hard → Easy on Mult-hard test data).
+
+### Visualizing Attention Patterns
+
+python attension_visualization.py
+
+Generates attention heatmaps for L1H6 (character detector) and L1H4 (aggregator).
+
+## Model Architecture
+
+- Layers: 2
+- Attention Heads: 8 per layer
+- Embedding Dimension: 128
+- Context Length: 64
+- Tokenization: Character-level
+
+## Contributors
+
+- @ijinyu1113
+- @WKaiZ
+- @siva-tanikonda
+- @sanjay-adhikesaven
