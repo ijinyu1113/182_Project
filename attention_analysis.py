@@ -150,9 +150,30 @@ class HeadMetrics:
 
 def load_pickle(path: Path):
     import pickle
+    import sys
+
+    # Handle pickle files that reference __main__ module classes
+    # Map them to attention_analysis module classes
+    class CustomUnpickler(pickle.Unpickler):
+        def find_class(self, module, name):
+            # If pickle is looking for classes in __main__, redirect to attention_analysis
+            if module == "__main__":
+                # Import the current module to get access to classes
+                if name == "CountingTokenizer":
+                    return CountingTokenizer
+                elif name == "Vocabulary":
+                    return Vocabulary
+                elif name == "CountingDataset":
+                    return CountingDataset
+            return super().find_class(module, name)
 
     with path.open("rb") as f:
-        return pickle.load(f)
+        try:
+            return CustomUnpickler(f).load()
+        except (AttributeError, ModuleNotFoundError) as e:
+            # Fallback to standard pickle if custom unpickler fails
+            f.seek(0)
+            return pickle.load(f)
 
 
 def infer_config_from_checkpoint(checkpoint_path: Path, vocab_size: int) -> HookedTransformerConfig:

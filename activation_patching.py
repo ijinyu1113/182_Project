@@ -5,9 +5,18 @@ from attention_analysis import (
     load_pickle,
     collate_fn,
     evaluate_accuracy,
+    CountingTokenizer,
+    Vocabulary,
+    CountingDataset,
 )
 from pathlib import Path
 import glob
+import sys
+
+# Make classes available to pickle if it's looking in __main__
+sys.modules['__main__'].CountingTokenizer = CountingTokenizer
+sys.modules['__main__'].Vocabulary = Vocabulary
+sys.modules['__main__'].CountingDataset = CountingDataset
 
 def get_latest_checkpoint(model_name, project_root):
     pattern = str(project_root / f"checkpoint-{model_name}-epoch-*.pt")
@@ -82,52 +91,61 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     project_root = Path.cwd()
     
-    print("="*70)
-    print("ACTIVATION PATCHING: All-hard → Easy on Mult-hard")
-    print("="*70)
+    # Create output file
+    output_file = project_root / "activation_patching_results.txt"
+    output_lines = []
+    
+    def log(message):
+        """Print to console and add to output lines"""
+        print(message)
+        output_lines.append(message)
+    
+    log("="*70)
+    log("ACTIVATION PATCHING: All-hard → Easy on Mult-hard")
+    log("="*70)
     
     # Load tokenizer
     tokenizer = load_pickle(project_root / "train-all-hard-tokenizer.pkl")
     vocab_size = tokenizer.vocab.size + 5
     
     # Load Mult-hard test data
-    print("\nLoading Mult-hard test dataset...")
+    log("\nLoading Mult-hard test dataset...")
     dataset = load_pickle(project_root / "test-mult-hard-dataset.pkl")
     dataloader = DataLoader(dataset, batch_size=64, shuffle=False, collate_fn=collate_fn)
-    print(f"  {len(dataset)} examples")
+    log(f"  {len(dataset)} examples")
     
     # Load models
-    print("\nLoading models...")
+    log("\nLoading models...")
     
     # DONOR: All-hard
     ckpt_hard = get_latest_checkpoint("all-hard", project_root)
     model_source = build_model(vocab_size, device, checkpoint_path=ckpt_hard)
     model_source.load_state_dict(torch.load(ckpt_hard, map_location=device)["model_state_dict"])
     model_source.eval()
-    print(f"  ✓ Donor: All-hard")
+    log(f"  ✓ Donor: All-hard")
     
     # RECEIVER: Easy
     ckpt_easy = get_latest_checkpoint("easy", project_root)
     model_target = build_model(vocab_size, device, checkpoint_path=ckpt_easy)
     model_target.load_state_dict(torch.load(ckpt_easy, map_location=device)["model_state_dict"])
     model_target.eval()
-    print(f"  ✓ Receiver: Easy")
+    log(f"  ✓ Receiver: Easy")
     
     # Baselines
-    print("\n" + "="*70)
-    print("BASELINES")
-    print("="*70)
+    log("\n" + "="*70)
+    log("BASELINES")
+    log("="*70)
     
     acc_easy = evaluate_accuracy(model_target, dataloader, device, max_batches=50)
-    print(f"Easy on Mult-hard:     {acc_easy:.1%}")
+    log(f"Easy on Mult-hard:     {acc_easy:.1%}")
     
     acc_hard = evaluate_accuracy(model_source, dataloader, device, max_batches=50)
-    print(f"All-hard on Mult-hard: {acc_hard:.1%}")
+    log(f"All-hard on Mult-hard: {acc_hard:.1%}")
     
     # Patching experiments (5 conditions from paper)
-    print("\n" + "="*70)
-    print("PATCHING: All-hard → Easy")
-    print("="*70)
+    log("\n" + "="*70)
+    log("PATCHING: All-hard → Easy")
+    log("="*70)
     
     configs = [
         ("L1H6 only (detector)", [(1, [6])]),
@@ -142,20 +160,26 @@ def main():
         acc = run_patching(model_source, model_target, dataloader, device, layer_heads)
         improvement = acc - acc_easy
         results.append((name, acc, improvement))
-        print(f"{name}: {acc:.1%} (Δ = {improvement:+.1%})")
+        log(f"{name}: {acc:.1%} (Δ = {improvement:+.1%})")
     
     # Summary table
-    print("\n" + "="*70)
-    print("SUMMARY (Table 4)")
-    print("="*70)
-    print(f"{'Condition':<35} {'Accuracy':>10} {'Improvement':>12}")
-    print("-"*60)
-    print(f"{'Easy on Mult-hard (baseline)':<35} {acc_easy:>10.1%} {'–':>12}")
-    print(f"{'All-hard on Mult-hard':<35} {acc_hard:>10.1%} {'–':>12}")
-    print("-"*60)
+    log("\n" + "="*70)
+    log("SUMMARY (Table 4)")
+    log("="*70)
+    log(f"{'Condition':<35} {'Accuracy':>10} {'Improvement':>12}")
+    log("-"*60)
+    log(f"{'Easy on Mult-hard (baseline)':<35} {acc_easy:>10.1%} {'–':>12}")
+    log(f"{'All-hard on Mult-hard':<35} {acc_hard:>10.1%} {'–':>12}")
+    log("-"*60)
     for name, acc, imp in results:
-        print(f"{name:<35} {acc:>10.1%} {imp:>+12.1%}")
-    print("="*70)
+        log(f"{name:<35} {acc:>10.1%} {imp:>+12.1%}")
+    log("="*70)
+    
+    # Write results to file
+    with open(output_file, "w") as f:
+        f.write("\n".join(output_lines))
+    
+    print(f"\n✓ Results saved to {output_file}")
 
 if __name__ == "__main__":
     main()
