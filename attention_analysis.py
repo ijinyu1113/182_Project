@@ -158,8 +158,13 @@ def load_pickle(path: Path):
         def find_class(self, module, name):
             # If pickle is looking for classes in __main__, redirect to attention_analysis
             if module == "__main__":
-                # Import the current module to get access to classes
-                if name == "CountingTokenizer":
+                # Handle nested classes like Vocabulary.TrieNode
+                if "." in name:
+                    class_name, nested_name = name.split(".", 1)
+                    if class_name == "Vocabulary" and nested_name == "TrieNode":
+                        return Vocabulary.TrieNode
+                # Handle top-level classes
+                elif name == "CountingTokenizer":
                     return CountingTokenizer
                 elif name == "Vocabulary":
                     return Vocabulary
@@ -173,7 +178,17 @@ def load_pickle(path: Path):
         except (AttributeError, ModuleNotFoundError) as e:
             # Fallback to standard pickle if custom unpickler fails
             f.seek(0)
-            return pickle.load(f)
+            try:
+                return pickle.load(f)
+            except AttributeError as e2:
+                # If that also fails, try to add classes to __main__ if possible
+                if "__main__" in str(e2) and "CountingTokenizer" in str(e2):
+                    raise AttributeError(
+                        f"Could not load pickle: {e2}. "
+                        "Make sure to import CountingTokenizer, Vocabulary, and CountingDataset "
+                        "from attention_analysis and add them to sys.modules['__main__']"
+                    ) from e2
+                raise
 
 
 def infer_config_from_checkpoint(checkpoint_path: Path, vocab_size: int) -> HookedTransformerConfig:

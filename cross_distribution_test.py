@@ -10,9 +10,18 @@ from attention_analysis import (
     load_pickle,
     collate_fn,
     evaluate_accuracy,
+    CountingTokenizer,
+    Vocabulary,
+    CountingDataset,
 )
 from pathlib import Path
 import glob
+import sys
+
+# Make classes available to pickle if it's looking in __main__
+sys.modules['__main__'].CountingTokenizer = CountingTokenizer
+sys.modules['__main__'].Vocabulary = Vocabulary
+sys.modules['__main__'].CountingDataset = CountingDataset
 
 def get_latest_checkpoint(model_name, project_root):
     pattern = str(project_root / f"checkpoint-{model_name}-epoch-*.pt")
@@ -27,16 +36,25 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     project_root = Path.cwd()
     
-    print("="*70)
-    print("TABLE 5: Cross-Distribution Generalization")
-    print("="*70)
+    # Create output file
+    output_file = project_root / "cross_distribution_test_results.txt"
+    output_lines = []
+    
+    def log(message):
+        """Print to console and add to output lines"""
+        print(message)
+        output_lines.append(message)
+    
+    log("="*70)
+    log("TABLE 5: Cross-Distribution Generalization")
+    log("="*70)
     
     # Load tokenizer
     tokenizer = load_pickle(project_root / "train-all-hard-tokenizer.pkl")
     vocab_size = tokenizer.vocab.size + 5
     
     # Load test datasets
-    print("\nLoading test datasets...")
+    log("\nLoading test datasets...")
     datasets = {
         "easy": load_pickle(project_root / "test-easy-dataset.pkl"),
         "length-hard": load_pickle(project_root / "test-length-hard-dataset.pkl"),
@@ -49,10 +67,10 @@ def main():
     }
     
     for name, ds in datasets.items():
-        print(f"  {name}: {len(ds)} examples")
+        log(f"  {name}: {len(ds)} examples")
     
     # Load models
-    print("\nLoading models...")
+    log("\nLoading models...")
     models = {}
     
     for model_name in ["easy", "length-hard", "all-hard"]:
@@ -61,41 +79,47 @@ def main():
         model.load_state_dict(torch.load(ckpt, map_location=device)["model_state_dict"])
         model.eval()
         models[model_name] = model
-        print(f"  ✓ Loaded {model_name}")
+        log(f"  ✓ Loaded {model_name}")
     
     # Test each model on each dataset
-    print("\n" + "="*70)
-    print("RESULTS")
-    print("="*70)
+    log("\n" + "="*70)
+    log("RESULTS")
+    log("="*70)
     
     results = {}
     
     for model_name, model in models.items():
         results[model_name] = {}
-        print(f"\n{model_name} model:")
+        log(f"\n{model_name} model:")
         
         for test_name, dataloader in dataloaders.items():
             acc = evaluate_accuracy(model, dataloader, device, max_batches=100)
             results[model_name][test_name] = acc
-            print(f"  on {test_name}: {acc*100:.1f}%")
+            log(f"  on {test_name}: {acc*100:.1f}%")
     
     # Print Table 5 format
-    print("\n" + "="*70)
-    print("TABLE 5: Distribution Specificity")
-    print("="*70)
-    print(f"{'Model':<15} {'Training Dist.':<15} {'Own Test':>10} {'Length-Hard':>12} {'Mult-Hard':>10}")
-    print("-"*70)
+    log("\n" + "="*70)
+    log("TABLE 5: Distribution Specificity")
+    log("="*70)
+    log(f"{'Model':<15} {'Training Dist.':<15} {'Own Test':>10} {'Length-Hard':>12} {'Mult-Hard':>10}")
+    log("-"*70)
     
     # Easy
-    print(f"{'Easy':<15} {'(5-10, 1-2)':<15} {results['easy']['easy']*100:>10.1f} {results['easy']['length-hard']*100:>12.1f} {results['easy']['mult-hard']*100:>10.1f}")
+    log(f"{'Easy':<15} {'(5-10, 1-2)':<15} {results['easy']['easy']*100:>10.1f} {results['easy']['length-hard']*100:>12.1f} {results['easy']['mult-hard']*100:>10.1f}")
     
     # Length-hard
-    print(f"{'Length-hard':<15} {'(20-50, 1-2)':<15} {results['length-hard']['length-hard']*100:>10.1f} {results['length-hard']['length-hard']*100:>12.1f} {'–':>10}")
+    log(f"{'Length-hard':<15} {'(20-50, 1-2)':<15} {results['length-hard']['length-hard']*100:>10.1f} {results['length-hard']['length-hard']*100:>12.1f} {results['length-hard']['mult-hard']*100:>10.1f}")
     
     # All-hard
-    print(f"{'All-hard':<15} {'(20-50, 3-10)':<15} {results['all-hard']['easy']*100:>10.1f} {results['all-hard']['length-hard']*100:>12.1f} {results['all-hard']['mult-hard']*100:>10.1f}")
+    log(f"{'All-hard':<15} {'(20-50, 3-10)':<15} {results['all-hard']['easy']*100:>10.1f} {results['all-hard']['length-hard']*100:>12.1f} {results['all-hard']['mult-hard']*100:>10.1f}")
     
-    print("="*70)
+    log("="*70)
+    
+    # Write results to file
+    with open(output_file, "w") as f:
+        f.write("\n".join(output_lines))
+    
+    print(f"\n✓ Results saved to {output_file}")
 
 if __name__ == "__main__":
     main()

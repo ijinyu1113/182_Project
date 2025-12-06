@@ -1,0 +1,42 @@
+======================================================================
+TABLE 5: Cross-Distribution Generalization
+======================================================================
+
+Loading test datasets...
+  easy: 10000 examples
+  length-hard: 10000 examples
+  mult-hard: 10000 examples
+
+Loading models...
+  ✓ Loaded easy
+  ✓ Loaded length-hard
+  ✓ Loaded all-hard
+
+======================================================================
+RESULTS
+======================================================================
+
+easy model:
+  on easy: 100.0%
+  on length-hard: 58.3%
+  on mult-hard: 0.0%
+
+length-hard model:
+  on easy: 75.3%
+  on length-hard: 83.8%
+  on mult-hard: 1.8%
+
+all-hard model:
+  on easy: 0.0%
+  on length-hard: 0.0%
+  on mult-hard: 12.9%
+
+======================================================================
+TABLE 5: Distribution Specificity
+======================================================================
+Model           Training Dist.    Own Test  Length-Hard  Mult-Hard
+----------------------------------------------------------------------
+Easy            (5-10, 1-2)          100.0         58.3        0.0
+Length-hard     (20-50, 1-2)          83.8         83.8        1.8
+All-hard        (20-50, 3-10)          0.0          0.0       12.9
+======================================================================
