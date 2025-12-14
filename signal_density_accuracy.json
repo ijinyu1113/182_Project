@@ -1,0 +1,67 @@
+{
+  "plot": {
+    "x_axis": "multiplicity_midpoint (labeled by multiplicity_range)",
+    "y_axis": "accuracy",
+    "accuracy_source": "evaluate",
+    "series": {
+      "short": {
+        "models": [
+          "easy",
+          "mult-hard"
+        ]
+      },
+      "long": {
+        "models": [
+          "length-hard",
+          "all-hard"
+        ]
+      }
+    }
+  },
+  "results": {
+    "easy": {
+      "checkpoint": "/Users/wkaiz/Desktop/182_Project/checkpoint-easy-epoch-40.pt",
+      "n_examples": 10000,
+      "accuracy": 1.0,
+      "length_regime": "short",
+      "multiplicity_range": [
+        1,
+        2
+      ],
+      "multiplicity_midpoint": 1.5
+    },
+    "mult-hard": {
+      "checkpoint": "/Users/wkaiz/Desktop/182_Project/checkpoint-mult-hard-epoch-40.pt",
+      "n_examples": 10000,
+      "accuracy": 0.9932,
+      "length_regime": "short",
+      "multiplicity_range": [
+        3,
+        10
+      ],
+      "multiplicity_midpoint": 6.5
+    },
+    "length-hard": {
+      "checkpoint": "/Users/wkaiz/Desktop/182_Project/checkpoint-length-hard-epoch-40.pt",
+      "n_examples": 10000,
+      "accuracy": 0.8374,
+      "length_regime": "long",
+      "multiplicity_range": [
+        1,
+        2
+      ],
+      "multiplicity_midpoint": 1.5
+    },
+    "all-hard": {
+      "checkpoint": "/Users/wkaiz/Desktop/182_Project/checkpoint-all-hard-epoch-40.pt",
+      "n_examples": 10000,
+      "accuracy": 0.9996,
+      "length_regime": "long",
+      "multiplicity_range": [
+        3,
+        10
+      ],
+      "multiplicity_midpoint": 6.5
+    }
+  }
+}
