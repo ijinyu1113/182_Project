@@ -15,23 +15,41 @@ We train 2-layer transformer models on a character-counting task ("Count the let
 ## Repository Structure
 
 ├── model.ipynb                       # Main training notebook
+
 ├── attention_analysis.py             # Head ablation & attention analysis
+
 ├── ov_qk_circuit_analysis.py         # OV/QK eigenvalue analysis
+
 ├── activation_patching.py            # Circuit transfer experiments
+
 ├── attension_visualization.py        # Attention pattern visualization
+
 │
+
 ├── checkpoint-{model}-epoch-{N}.pt   # Model checkpoints
+
 ├── train-{model}-dataset.pkl         # Training datasets (100K examples)
+
 ├── test-{model}-dataset.pkl          # Test datasets (10K examples)
+
 ├── train-{model}-tokenizer.pkl       # Tokenizers
+
 │
+
 ├── key_heads_{model}.json            # Critical head analysis results
+
 ├── attention_metrics.json            # Letter-match & entropy metrics
+
 ├── ov_qk_circuit_metrics.json        # OV/QK eigenvalue results
+
 ├── patching_results.json             # Activation patching results
+
 │
+
 ├── l1h6_pattern_ex*.png              # L1H6 attention visualizations
+
 ├── l1h4_pattern_ex*.png              # L1H4 attention visualizations
+
 └── requirements.txt                  # Dependencies
 
 ## Training Distributions
